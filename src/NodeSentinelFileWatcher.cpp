@@ -74,11 +74,11 @@ namespace NSFW {
       // Event event = events.front();
       // events.pop();
       //
-      // v8::Local<v8::Value> argv[] = {
-      //   New<v8::String>(event.action).ToLocalChecked(),
-      //   New<v8::String>(event.directory).ToLocalChecked(),
-      //   New<v8::String>(event.oldDirectory).ToLocalChecked()
-      // };
+      v8::Local<v8::Value> argv[] = {
+        New<v8::String>("lol").ToLocalChecked(),
+        New<v8::String>("lol").ToLocalChecked(),
+        New<v8::String>("lol").ToLocalChecked()
+      };
 
       callback->Call(3, argv);
     // }

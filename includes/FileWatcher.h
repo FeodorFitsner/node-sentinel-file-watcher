@@ -1,13 +1,12 @@
 #ifndef FILEWATCHER_H
 #define FILEWATCHER_H
 
-struct Event {
-  std::string action;
-  std::string directory;
-  std::string file;
-};
+#include <string>
+#include <queue>
+#include "FileWatcherInterface.h"
 
 namespace NSFW {
+
   class FileWatcher {
   public:
     // Constructor

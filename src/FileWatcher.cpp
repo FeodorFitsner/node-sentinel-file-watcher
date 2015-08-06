@@ -1,8 +1,8 @@
-#include "FileWatcher.h"
-#include "FileWatcherInterface.h"
+#include "../includes/FileWatcher.h"
+#include "../includes/FileWatcherInterface.h"
 
-#if defined(_WIN32)
-#include "includes/FileWatcher32.h"
+#if defined(WIN32) || defined(_WIN32) || defined(__WIN32)
+#include "../includes/FileWatcher32.h"
 #define FILE_WATCHER_INTERFACE FileWatcher32
 #elif defined(__APPLE_CC__) || defined(BSD)
 #elif defined(__linux__)
@@ -10,8 +10,8 @@
 
 namespace NSFW {
 
-  FileWatcher::FileWatcher() {
-    fwInterface = new FILE_WATCHER_INTERFACE(mEventsQueue);
+  FileWatcher::FileWatcher(std::string path) {
+    fwInterface = new FILE_WATCHER_INTERFACE(path, mEventsQueue);
   }
   FileWatcher::~FileWatcher() {
     delete fwInterface;

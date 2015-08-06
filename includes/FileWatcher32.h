@@ -1,29 +1,24 @@
 #ifndef FILEWATCHER32_H
 #define FILEWATCHER32_H
-#using <system.dll>
-using namespace System;
-using namespace System::IO;
 
 #include "FileWatcherInterface.h"
+#include <windows.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <tchar.h>
+#include <iostream>
 
 namespace NSFW {
 
-  ref class FSEventHandler {
-  public:
-    FSEventHandler(std::string path, std::queue<Event> &eventsQueue);
-    void OnChanged(Object^ source, FileSystemEventArgs^ e);
-    void OnRenamed(Object^ source, RenamedEventArgs^ e);
-  private:
-    std::queue<Event> &mEventsQueue;
-  };
-
   class FileWatcher32 : public FileWatcherInterface {
   public:
-    FileWatcher32(std::queue<Event> &eventsQueue);
+    FileWatcher32(std::string path, std::queue<Event> &eventsQueue);
     ~FileWatcher32();
+    static DWORD WINAPI mainLoop(LPVOID lpParam);
+    void watchDirectory();
   private:
-    FileSystemWatcher^ fsWatcher;
-    FSEventHandler^ handler;
+    std::queue<Event> &mEventsQueue;
+    std::string mPath;
   };
 
 }
